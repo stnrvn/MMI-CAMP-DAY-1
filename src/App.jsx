@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 // components
 import MyButton from './components/button';
+import MyTable from './components/table';
 
 function App() {
   const [counter, setCounter] = useState(0)
@@ -12,26 +13,34 @@ function App() {
 
   const [data, setData] = useState([
     {
-      name: 'surya',
-      age: 21
+      id: 1,
+      car: 'BMW',
+      type: 'Sport',
+      year: 1997
     },
     {
-      name: 'bima',
-      age: 25
+      id: 2,
+      car: 'Mercy',
+      type: 'E',
+      year: 1997
     },
   ])
 
-  const handleDelete = () => {
-    data.filter()
+  const [columns, setColumns] = useState([
+    'Car',
+    'Type',
+    'Year',
+    'Aksi'
+  ])
+
+  const handleDelete = (id) => {
+    setData(data.filter(item => item.id !== id))
+    console.log(id)
   }
 
-  const handleCounter = (num) => {
-    setCounter(counter + num)
-  }
-
-  // useEffect(() => {
-  //   console.log('use effect run');
-  // },[])
+  // const handleCounter = (num) => {
+  //   setCounter(counter + num)
+  // }
 
   useEffect(() => {
     // ini menjalankan suatu function saat web belum benar2 muncul
@@ -39,69 +48,22 @@ function App() {
     // willount
     console.log('use effect run')
 
-  }, [counter])
+  }, [data])
 
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       {counter} click!
-    //     </p>
-    //     {/* <button onClick={() => handleCounter(5)}>click me!</button> */}
-    //     <button type="button" className="btn btn-primary">Primary</button>
-    //     {/* <MyButton 
-    //       buttonName={buttonName}
-    //     /> */}
-    //   </header>
-    // </div>
-    <div className="container">
-      <div className="row">
-
-        <div className="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-            </div>
+    <>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6">
+            <MyTable
+              columns={columns}
+              datas={data}
+              onDelete={handleDelete}
+            />
           </div>
-        </div>
-
-        <div className="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-            </div>
-          </div>
-        </div>
-
-        <div className="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-            </div>
-          </div>
-        </div>
-        
-      </div>
-
-      <div className="row">
-        <div className="col-lg-12">
-          {
-            data.map(item => {
-              return(
-                <>
-                  <p>{item.name}</p>
-                  <p>{item.age}</p>
-                </>
-              )
-            })
-          }
         </div>
       </div>
-
-        {/* INI TABLE DIBAWAH CUMAN CONTOH PENULISAN*/}
-      {/* <MyTable data={data} onDelete={handleDelete}/> */}
-    </div>
+    </>
   );
 }
 
