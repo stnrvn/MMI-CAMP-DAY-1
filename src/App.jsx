@@ -27,6 +27,7 @@ function App() {
   ])
 
   const [columns, setColumns] = useState([
+    'Id',
     'Car',
     'Type',
     'Year',
