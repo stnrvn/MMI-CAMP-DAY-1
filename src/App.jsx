@@ -43,24 +43,65 @@ function App() {
   //   setCounter(counter + num)
   // }
 
-  useEffect(() => {
-    // ini menjalankan suatu function saat web belum benar2 muncul
-    // cth: get data from api
-    // willount
-    console.log('use effect run')
 
-  }, [data])
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const payload = {
+      email,
+      password
+    }
+
+    if(password === ''){
+      alert('password tidak boleh kosong')
+    } else if(email === ''){
+      alert('email tidak boleh kosong')
+    } else {
+      console.log(payload, 'data submit')
+    }
+
+  }
 
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
-            <MyTable
+            {/* <MyTable
               columns={columns}
               datas={data}
               onDelete={handleDelete}
-            />
+            /> */}
+
+            {/* kalau di form nya ada onSubmit, berarti itu akan otomatis mengarah ke button type="submit" */}
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
+                {/* <p>{email}</p> buat test */}
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="name@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">Password</label>
+                {/* <p>{password}</p> buat test*/}
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="*****"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <button type="submit" >submit</button>
+            </form>
+
           </div>
         </div>
       </div>
