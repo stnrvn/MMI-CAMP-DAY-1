@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import axios from 'axios';
 // components
 // import MyButton from '../../components/button';
 // import MyTable from '../../components/table';
@@ -63,6 +63,20 @@ const Home = () => {
 
   }
 
+  const [weatherData, setWeatherData] = useState([])
+  const getWeatherData = async() => {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=-6.200000&lon=106.816666&appid=80ab32cb35d451b42d8b6a1de0528383`)
+    const responseJson = await response.json()
+
+    setWeatherData(responseJson)
+
+    console.log(responseJson, 'data weather')
+  }
+
+  useEffect(() => {
+    getWeatherData()
+  }, [])
+
   return (
     <>
       <div className="container">
@@ -103,9 +117,20 @@ const Home = () => {
           </div>
         </div>
       </div>
+      
 
-      <div>ini halaman login</div>
-      <div>ini halaman login</div>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <p>Weather: {weatherData.weather[0].description}</p>
+                <p>Wind Speed: {weatherData.wind.speed}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
