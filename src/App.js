@@ -5,13 +5,22 @@ import {
 } from 'react-router-dom'
 
 import {
-  Cars
+  Cars,
+  CarsFormAdd,
+  CarsFormEdit,
+  Home
 } from './pages'
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path='/cars/add'>
+          <CarsFormAdd />
+        </Route>
+        <Route path='/cars/edit/:id'>
+          <CarsFormEdit />
+        </Route>
         <Route path='/cars'>
           <Cars />
         </Route>

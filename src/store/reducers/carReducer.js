@@ -1,5 +1,6 @@
 const initialState  = {
-  cars: []
+  cars: [],
+  carById: {}
 }
 
 const carReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const carReducer = (state = initialState, action) => {
       return {
         ...state,
         cars: action.payload
+      }
+    case 'FETCH_CARS_BY_ID':
+      return {
+        ...state,
+        carById: action.payload
       }
     default:
       return state

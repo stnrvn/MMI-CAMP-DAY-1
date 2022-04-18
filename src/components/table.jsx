@@ -1,17 +1,21 @@
 
+import { Link } from "react-router-dom";
+import { useHistory, useParams } from 'react-router-dom'
 
 const MyTable = ({
   columns,
   datas,
+  handleAdd,
+  handleUpdate,
   onDelete
 }) => {
-
-  const dynamicKey = () => {
-     
-  }
+  const history = useHistory()
 
   return(
     <>
+    <Link to="/cars/add">
+      add cars
+    </Link>
       <table className="table">
         <thead>
             <tr>
@@ -34,8 +38,12 @@ const MyTable = ({
                     <>
                         <tr>
                             {
-                              Object.keys(data).map(key => 
-                                <th>{data[key]}</th>
+                              Object.keys(data).map(key =>
+                                <th >
+                                  <Link to={`/cars/edit/${data.id}`}>
+                                    {data[key]}
+                                  </Link>
+                                </th>
                               )
                             }
                           <th><button onClick={() => onDelete(data.id)}>Delete</button></th>
